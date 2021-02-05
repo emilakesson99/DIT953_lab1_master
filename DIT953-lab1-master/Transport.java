@@ -28,19 +28,28 @@ public class Transport extends Car implements Ramp {
         return getEnginePower() * 0.01;
     }
 
-
+    /**
+     * Activates ramp
+     */
     @Override
     public void turnOnRamp() {
         if (getCurrentSpeed() == 0)
             rampActive = true;
     }
 
-
+    /**
+     * Deactivates ramp
+     */
     @Override
     public void turnOffRamp() {
         rampActive = false;
     }
 
+    /**
+     * Loads a car onto the truck if it is possible
+     *
+     * @param car
+     */
     public void loadCargo(Car car) {
         if (amountOfCars < maxAmountCars
                 && rampActive
@@ -54,6 +63,11 @@ public class Transport extends Car implements Ramp {
         }
     }
 
+    /**
+     * Deloads the all the cars until the targeted car is out.
+     *
+     * @param car
+     */
     public void deloadCargo(Car car) {
         if (checkCargo(car) && !(car instanceof Transport))
             if (rampActive) {
@@ -77,6 +91,10 @@ public class Transport extends Car implements Ramp {
 
     }
 
+    /**
+     * @param car
+     * @return true if car is on the truck, false otherwise
+     */
     public boolean checkCargo(Car car) {
         for (int i = 0; i < cargo.size(); i++) {
             if (cargo.get(i) == car) {
