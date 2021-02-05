@@ -7,7 +7,7 @@ import java.awt.*;
  * @version 1.0
  * @since 2021-01-29
  */
-public abstract class Car implements Movable {
+public abstract class Car implements Movable  {
 
     private double x = 0;
     private double y = 0;
@@ -83,6 +83,10 @@ public abstract class Car implements Movable {
      */
     public double getCurrentSpeed() {
         return currentSpeed;
+    }
+
+    public void setCurrentSpeed(double i) {
+        currentSpeed = i;
     }
 
     /**
@@ -215,4 +219,6 @@ public abstract class Car implements Movable {
             setCurrentDir(Directions.NORTH);
         }
     }
+
+
 }
