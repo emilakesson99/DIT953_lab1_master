@@ -1,11 +1,11 @@
 import java.awt.*;
 import java.io.IOException;
 
-public class Scania extends Car {
+public class Scania extends Vehicle {
 
     public double platformAngle;
-    private final double maxAngle = 70;
-    private final double minAngle = 0;
+    private static final double maxAngle = 70;
+    private static final double minAngle = 0;
 
     public Scania(int nDoors, double enginePower, Color color, String modelName) {
         super(nDoors, enginePower, color, modelName);
@@ -28,8 +28,8 @@ public class Scania extends Car {
             } else if (a < minAngle) {
                 platformAngle = minAngle;
 
-            }
-            platformAngle = a;
+            } else
+                platformAngle = a;
 
         }
 

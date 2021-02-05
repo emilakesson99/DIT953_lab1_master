@@ -7,6 +7,10 @@
       <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Test" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/Test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Cars" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Interfaces" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Transportation" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Workshops" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

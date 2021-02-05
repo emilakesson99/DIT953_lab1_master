@@ -7,7 +7,7 @@ import java.awt.*;
  * @version 1.0
  * @since 2021-01-29
  */
-public class Saab95 extends Car {
+public class Saab95 extends Car implements CarNotAllowed {
     /**
      * if turbo is on it's set to true
      */

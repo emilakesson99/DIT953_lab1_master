@@ -7,7 +7,7 @@ import java.awt.*;
  * @version 1.0
  * @since 2021-01-29
  */
-public class Volvo240 extends Car {
+public class Volvo240 extends Car implements CarNotAllowed {
 
     private final static double trimFactor = 1.25;
 

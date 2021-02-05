@@ -1,13 +1,6 @@
 import java.awt.*;
 
-/**
- * Car class
- *
- * @author Birk, Emil
- * @version 1.0
- * @since 2021-01-29
- */
-public abstract class Car implements Movable  {
+public abstract class Vehicle implements Movable{
 
     private double x = 0;
     private double y = 0;
@@ -33,7 +26,7 @@ public abstract class Car implements Movable  {
      * @param color       This is car color
      * @param modelName   This is car model name
      */
-    public Car(int nrDoors, double enginePower, Color color, String modelName) {
+    public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -55,7 +48,7 @@ public abstract class Car implements Movable  {
         this.currentDir = currentDir;
     }
 
-    public double getX() {
+    public  double getX() {
         return x;
     }
 
@@ -219,6 +212,4 @@ public abstract class Car implements Movable  {
             setCurrentDir(Directions.NORTH);
         }
     }
-
-
 }

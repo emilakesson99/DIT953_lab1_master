@@ -1,13 +1,12 @@
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Transport extends Car implements Ramp {
-    private final List<Car> cargo = new ArrayList<Car>();
+public class Transport extends Vehicle implements Ramp {
+    private final List<Car> cargo = new ArrayList<>();
     public boolean rampActive = false;
     public double maxCargo;
-    public int maxAmountCars;
+    public int maxAmountCars = 40;
     public int amountOfCars = 0;
 
 
@@ -23,6 +22,9 @@ public class Transport extends Car implements Ramp {
         super(nrDoors, enginePower, color, modelName);
     }
 
+    public List<Car> getCargo() {
+        return cargo;
+    }
 
     public double speedFactor() {
         return getEnginePower() * 0.01;
@@ -42,7 +44,8 @@ public class Transport extends Car implements Ramp {
      */
     @Override
     public void turnOffRamp() {
-        rampActive = false;
+        if (getCurrentSpeed() == 0)
+            rampActive = false;
     }
 
     /**
@@ -69,7 +72,7 @@ public class Transport extends Car implements Ramp {
      * @param car
      */
     public void deloadCargo(Car car) {
-        if (checkCargo(car) && !(car instanceof Transport))
+        if (checkCargo(car))
             if (rampActive) {
                 for (int i = 0; i < cargo.size(); i++) {
 
