@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WorkshopTest {
-    Workshop<Car> ws1 = new MultiWorkshop<Car>();
-    Workshop<Volvo240> ws2 = new SingleWorkshop<Volvo240>();
-    Workshop<Saab95> ws3 = new SingleWorkshop<Saab95>();
+    Workshop<Car> ws1 = new Workshop<>();
+    Workshop<Volvo240> ws2 = new Workshop<>();
+    Workshop<Saab95> ws3 = new Workshop<>();
 
     Volvo240 v = new Volvo240();
     Saab95 s = new Saab95();

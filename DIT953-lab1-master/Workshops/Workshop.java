@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Workshop<R> {
+public class Workshop<R extends Car> {
 
     private static final int maxAmountOfCars = 20;
     private int amountOfCars;

@@ -7,7 +7,7 @@ import java.awt.*;
  * @version 1.0
  * @since 2021-01-29
  */
-public abstract class Car extends Vehicle implements OnlyCarAllowed {
+public abstract class Car extends Vehicle {
     /**
      * Constructor
      *
