@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,6 +16,9 @@ class CarTest {
 
     Car saab = new Saab95();
     Car volvo = new Volvo240();
+
+    CarTest() throws IOException {
+    }
 
     @Test
     void getNrDoors() {
@@ -45,7 +49,7 @@ class CarTest {
     }
 
     @Test
-    void setColor() {
+    void setColor() throws IOException {
         Saab95 saab1 = new Saab95();
         Volvo240 volvo1 = new Volvo240();
         saab1.setColor(Color.white);

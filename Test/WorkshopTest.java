@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class WorkshopTest {
@@ -12,6 +14,9 @@ class WorkshopTest {
     Saab95 s = new Saab95();
     Car c = new Saab95();
     Car c2 = new Volvo240();
+
+    WorkshopTest() throws IOException {
+    }
 
     @BeforeEach
     void setUp() {

@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,7 @@ class TransportTest {
     }
 
     @Test
-    void loadCargo() {
+    void loadCargo() throws IOException {
         transport.stopEngine();
         transport.turnOnRamp();
         Car car = new Volvo240();
@@ -37,7 +38,7 @@ class TransportTest {
     }
 
     @Test
-    void checkCargo() {
+    void checkCargo() throws IOException {
         Car car = new Volvo240();
         car.setY(transport.getY());
         car.setX(transport.getX());
@@ -47,7 +48,7 @@ class TransportTest {
     }
 
     @Test
-    void deloadCargo() {
+    void deloadCargo() throws IOException {
         Car car = new Volvo240();
         transport.loadCargo(car);
         transport.deloadCargo(car);

@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public abstract class Vehicle implements Movable{
+public abstract class Vehicle implements Movable {
 
     private double x = 0;
     private double y = 0;
@@ -10,6 +11,7 @@ public abstract class Vehicle implements Movable{
     private Color color; // Color of the car
     private String modelName;
     private Directions currentDir;
+    public BufferedImage img;
 
     public enum Directions {
         EAST,
@@ -26,11 +28,12 @@ public abstract class Vehicle implements Movable{
      * @param color       This is car color
      * @param modelName   This is car model name
      */
-    public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
+    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, BufferedImage img) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
+        this.img = img;
     }
 
     /**
@@ -48,7 +51,7 @@ public abstract class Vehicle implements Movable{
         this.currentDir = currentDir;
     }
 
-    public  double getX() {
+    public double getX() {
         return x;
     }
 
@@ -175,8 +178,8 @@ public abstract class Vehicle implements Movable{
     @Override
     public void move() {
         if (this.currentDir == null) {
-            this.currentDir = Directions.NORTH;
-            setY(getY() + getCurrentSpeed());
+            this.currentDir = Directions.EAST;
+            setX(getX() + getCurrentSpeed());
         } else if (this.currentDir == Directions.EAST) {
             setX(getX() + getCurrentSpeed());
         } else if (this.currentDir == Directions.SOUTH) {

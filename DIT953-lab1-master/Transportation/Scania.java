@@ -1,22 +1,17 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
 public class Scania extends Vehicle {
 
-    public double platformAngle;
+    private double platformAngle;
     private static final double maxAngle = 70;
     private static final double minAngle = 0;
 
-    public Scania(int nDoors, double enginePower, Color color, String modelName) {
-        super(nDoors, enginePower, color, modelName);
+    public Scania() throws IOException {
+        super(2, 540, Color.green, "Scania", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
         this.stopEngine();
-
-    }
-
-    public Scania() {
-        this(2, 540, Color.green, "Scania");
-        this.stopEngine();
-        platformAngle = 0;
+        changePlatform(0);
     }
 
 
@@ -36,26 +31,31 @@ public class Scania extends Vehicle {
     }
 
     public boolean platformCheck() {
-        if (platformAngle == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return platformAngle == 0;
     }
 
     public double getPlatformAngle() {
         return platformAngle;
     }
 
-    public void startEngineScania() {
+    @Override
+    public void startEngine() {
         if (platformCheck()) {
-            startEngine();
+            super.startEngine();
         }
     }
 
     public double speedFactor() {
         return getEnginePower() * 0.01;
     }
+
+    @Override
+    public void move() {
+        if (platformCheck()) {
+            super.move();
+        }
+    }
+
 }
 
 

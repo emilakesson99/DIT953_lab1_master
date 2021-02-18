@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Car class
@@ -16,7 +17,7 @@ public abstract class Car extends Vehicle {
      * @param color       This is car color
      * @param modelName   This is car model name
      */
-    public Car(int nrDoors, double enginePower, Color color, String modelName) {
-        super(nrDoors, enginePower, color, modelName);
+    public Car(int nrDoors, double enginePower, Color color, String modelName, BufferedImage img) {
+        super(nrDoors, enginePower, color, modelName, img);
     }
 }
