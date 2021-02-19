@@ -9,7 +9,7 @@ public class Scania extends Vehicle {
     private static final double minAngle = 0;
 
     public Scania() throws IOException {
-        super(2, 540, Color.green, "Scania", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+        super(2, 540, Color.green, "Scania");
         this.stopEngine();
         changePlatform(0);
     }
@@ -31,7 +31,7 @@ public class Scania extends Vehicle {
     }
 
     public boolean platformCheck() {
-        return platformAngle == 0;
+        return getPlatformAngle() == 0;
     }
 
     public double getPlatformAngle() {
@@ -42,6 +42,13 @@ public class Scania extends Vehicle {
     public void startEngine() {
         if (platformCheck()) {
             super.startEngine();
+        }
+    }
+
+    @Override
+    public void gas(double a) {
+        if (platformCheck()) {
+            super.gas(a);
         }
     }
 

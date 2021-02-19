@@ -19,7 +19,7 @@ public class Saab95 extends Car {
      * This Constructor is used to init a Saab of model 95
      */
     public Saab95() throws IOException {
-        super(2, 125, Color.red, "Saab95", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+        super(2, 125, Color.red, "Saab95");
         this.turboOn = false;
         this.stopEngine();
     }
