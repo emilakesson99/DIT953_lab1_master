@@ -19,7 +19,7 @@ public class Transport extends Vehicle implements Ramp {
      * @param modelName   This is car model name
      */
     public Transport(int nrDoors, double enginePower, Color color, String modelName) {
-        super(nrDoors, enginePower, color, modelName, null);
+        super(nrDoors, enginePower, color, modelName);
     }
 
     public List<Car> getCargo() {

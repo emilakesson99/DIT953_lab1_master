@@ -1,17 +1,17 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public abstract class Vehicle implements Movable {
-
-    private double x = 0;
-    private double y = 0;
+    public ArrayList<VehicleObserver> observers;
+    private double x;
+    private double y;
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName;
     private Directions currentDir;
-    public BufferedImage img;
 
     public enum Directions {
         EAST,
@@ -28,12 +28,20 @@ public abstract class Vehicle implements Movable {
      * @param color       This is car color
      * @param modelName   This is car model name
      */
-    public Vehicle(int nrDoors, double enginePower, Color color, String modelName, BufferedImage img) {
+    public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        this.img = img;
+
+    }
+
+    public void addObserver(VehicleObserver a) {
+        observers.add(a);
+    }
+
+    private void notifyObservers() {
+        for (VehicleObserver o : observers) o.update(this);
     }
 
     /**
@@ -105,14 +113,18 @@ public abstract class Vehicle implements Movable {
      * Starts the engine by setting currentSpeed to 0.1
      */
     public void startEngine() {
-        currentSpeed = 0.1;
+        setCurrentSpeed(0.1);
     }
 
     /**
      * Stops the engine
      */
     public void stopEngine() {
-        currentSpeed = 0;
+        setCurrentSpeed(0);
+    }
+
+    public String getModelName() {
+        return modelName;
     }
 
     /**
@@ -134,8 +146,8 @@ public abstract class Vehicle implements Movable {
      * @return currentSpeed
      */
     private double incrementSpeed(double amount) {
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
-        return currentSpeed;
+        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
+        return getCurrentSpeed();
     }
 
     /**
@@ -145,8 +157,8 @@ public abstract class Vehicle implements Movable {
      * @return currentSpeed
      */
     private double decrementSpeed(double amount) {
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
-        return currentSpeed;
+        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount, 0));
+        return getCurrentSpeed();
     }
 
     /**
@@ -156,7 +168,7 @@ public abstract class Vehicle implements Movable {
      */
     public void gas(double amount) {
         if (amount < 1 && amount > 0)
-            if (currentSpeed < enginePower && incrementSpeed(amount) < enginePower)
+            if (getCurrentSpeed() < getEnginePower() && incrementSpeed(amount) < getEnginePower())
                 incrementSpeed(amount);
     }
 

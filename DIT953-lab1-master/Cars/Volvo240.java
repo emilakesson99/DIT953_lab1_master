@@ -18,7 +18,7 @@ public class Volvo240 extends Car {
      * This Constructor is used to init a Volvo of model 240
      */
     public Volvo240() throws IOException {
-        super(4, 100, Color.black, "Volvo240", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
+        super(4, 100, Color.black, "Volvo240");
         this.stopEngine();
     }
 
