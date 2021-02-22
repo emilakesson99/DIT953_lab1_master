@@ -9,7 +9,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 2021-01-29
  */
-public class Saab95 extends Car {
+public class Saab95 extends Car implements Turbo {
     /**
      * if turbo is on it's set to true
      */
@@ -27,10 +27,12 @@ public class Saab95 extends Car {
     /**
      * Turn on and off turbo
      */
+    @Override
     public void setTurboOn() {
         turboOn = true;
     }
 
+    @Override
     public void setTurboOff() {
         turboOn = false;
     }
@@ -44,4 +46,8 @@ public class Saab95 extends Car {
         return getEnginePower() * 0.01 * turbo;
     }
 
+    @Override
+    public <T> void SendData(T v) {
+
+    }
 }

@@ -22,6 +22,7 @@ public class Volvo240 extends Car {
         this.stopEngine();
     }
 
+
     /**
      * @return double
      */

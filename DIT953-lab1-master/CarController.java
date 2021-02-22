@@ -24,9 +24,10 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     static ArrayList<Vehicle> cars = new ArrayList<>();
+    static ArrayList<Turbo> turbo = new ArrayList<>();
 
-    public CarController(ArrayList<Vehicle> a) {
-        setCars(a);
+    public CarController(ArrayList<Vehicle> a, ArrayList<Turbo> t) {
+        setCars(a, t);
     }
 
     //methods:
@@ -91,10 +92,10 @@ public class CarController {
     }
 
     void turboOn() {
-        for (Vehicle car : cars
+        for (Turbo car : turbo
         ) {
-            if (car instanceof Saab95)
-                ((Saab95) car).setTurboOn();
+
+            car.setTurboOn();
         }
     }
 
@@ -141,7 +142,8 @@ public class CarController {
         this.frame = frame;
     }
 
-    public void setCars(ArrayList<Vehicle> cars) {
+    public void setCars(ArrayList<Vehicle> cars, ArrayList<Turbo> turbo) {
         this.cars = cars;
+        this.turbo = turbo;
     }
 }

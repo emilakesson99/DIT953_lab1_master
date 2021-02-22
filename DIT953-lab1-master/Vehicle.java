@@ -13,6 +13,7 @@ public abstract class Vehicle implements Movable {
     private String modelName;
     private Directions currentDir;
 
+
     public enum Directions {
         EAST,
         WEST,
