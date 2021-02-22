@@ -1,0 +1,24 @@
+- Refaktorisering
+
+- En Interface läggs till för att skicka vidare data till view från modellen.
+- En lista med observers läggs till i modellen samt metoder för att uppdatera varje observer.
+- Vi skickar det det nuvarande objektet i modellen för att ritas.
+
+Observer interface har en generisk metod "update" med implementation beroende på vilket objekt som ska ritas.
+
+"update" metoden kommer att läggas i tex DrawPanel som ritar bilarna för varje frame.
+Den måste integreras med nuvarande paintComponent();
+
+
+	Interface: <T> void update(T v);
+	View-klass som lyssnar: @Override
+   				 public <T> void update(T v) {
+       					 Vehicle vehicle = (Vehicle) v;
+					 //använd vehicle's metoder..
+    							}
+
+- Nya ändringar i existerande kod:
+	- CarView (och Drawpanel) hanterar mer än bara visning av grafik (Flytta actionListeners)
+	- Bygga en CarApp klass där applikationen initieras.
+	- integrera updaterings metoden med CarController så att den kallas kontinuerligt.
+
