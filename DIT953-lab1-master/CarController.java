@@ -1,8 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -21,35 +19,17 @@ public class CarController {
     public final Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    private CarView frame;
     // A list of cars, modify if needed
-    static ArrayList<Vehicle> cars = new ArrayList<>();
-    static ArrayList<Turbo> turbo = new ArrayList<>();
+    static ArrayList<Vehicle> cars;
+    static ArrayList<Turbo> turbo;
+    static ArrayList<Ramp> ramp;
 
-    public CarController(ArrayList<Vehicle> a, ArrayList<Turbo> t) {
-        setCars(a, t);
+    public CarController(ArrayList<Vehicle> a, ArrayList<Turbo> t, ArrayList<Ramp> r, CarView frame) {
+        setFrame(frame);
+        initComponents();
+        setCars(a, t, r);
     }
-
-    //methods:
-    public void startTimer(CarController cc) {
-        cc.timer.start();
-    }
-
-   /* public static void main(String[] args) throws IOException {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        cc.cars.add(new Scania());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Volvo240());
-
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
-    }*/
 
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
@@ -58,24 +38,26 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getX());
-                //int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(car);
-
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-                if (x > 700) {
-                    car.setCurrentDir(Vehicle.Directions.WEST);
-                } else if (x < 0) {
-                    car.setCurrentDir(Vehicle.Directions.EAST);
-                }
+                checkWindow(car);
+                car.notifyObservers();
             }
 
         }
     }
 
+    //methods:
+    public void startTimer(CarController cc) {
+        cc.timer.start();
+    }
 
-    // Calls the gas method for each car once
+    void checkWindow(Vehicle c) {
+        if (c.getX() > 700) {
+            c.setCurrentDir(Vehicle.Directions.WEST);
+        } else if (c.getX() < 0) {
+            c.setCurrentDir(Vehicle.Directions.EAST);
+        }
+    }
+
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars
@@ -107,27 +89,24 @@ public class CarController {
     }
 
     void turboOff() {
-        for (Vehicle car : cars) {
-            if (car instanceof Saab95) {
-                ((Saab95) car).setTurboOff();
-            }
-
+        for (Turbo car : turbo) {
+            car.setTurboOff();
         }
     }
 
     void liftBed() {
-        for (Vehicle car : cars) {
-            if (car instanceof Scania) {
-                ((Scania) car).changePlatform(70);
-            }
+        for (Ramp car : ramp) {
+
+            car.changePlatform(70);
+
         }
     }
 
     void lowerBed() {
-        for (Vehicle car : cars) {
-            if (car instanceof Scania) {
-                ((Scania) car).changePlatform(0);
-            }
+        for (Ramp car : ramp) {
+
+            car.changePlatform(0);
+
         }
     }
 
@@ -138,12 +117,90 @@ public class CarController {
         }
     }
 
+    private void initComponents() {
+        // This actionListener is for the gas button only
+        // TODO: Create more for each component as necessary
+        frame.gasButton.addActionListener(new
+
+                                                  ActionListener() {
+                                                      @Override
+                                                      public void actionPerformed(ActionEvent e) {
+                                                          gas(frame.gasAmount);
+                                                      }
+                                                  });
+
+        frame.startButton.addActionListener(new
+
+                                                    ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            startEngine();
+                                                        }
+                                                    });
+        frame.stopButton.addActionListener(new
+
+                                                   ActionListener() {
+                                                       @Override
+                                                       public void actionPerformed(ActionEvent e) {
+                                                           stopEngine();
+                                                       }
+                                                   });
+        frame.turboOnButton.addActionListener(new
+
+                                                      ActionListener() {
+                                                          @Override
+                                                          public void actionPerformed(ActionEvent e) {
+                                                              turboOn();
+                                                          }
+                                                      });
+
+        frame.turboOffButton.addActionListener(new
+
+                                                       ActionListener() {
+                                                           @Override
+                                                           public void actionPerformed(ActionEvent e) {
+                                                               turboOff();
+                                                           }
+                                                       });
+
+        frame.liftBedButton.addActionListener(new
+
+                                                      ActionListener() {
+                                                          @Override
+                                                          public void actionPerformed(ActionEvent e) {
+                                                              liftBed();
+                                                          }
+                                                      });
+        frame.lowerBedButton.addActionListener(new
+
+                                                       ActionListener() {
+                                                           @Override
+                                                           public void actionPerformed(ActionEvent e) {
+                                                               lowerBed();
+                                                           }
+                                                       });
+
+        frame.brakeButton.addActionListener(new
+
+                                                    ActionListener() {
+                                                        @Override
+                                                        public void actionPerformed(ActionEvent e) {
+                                                            brake(frame.gasAmount);
+                                                        }
+                                                    });
+    }
+
     public void setFrame(CarView frame) {
         this.frame = frame;
     }
 
-    public void setCars(ArrayList<Vehicle> cars, ArrayList<Turbo> turbo) {
-        this.cars = cars;
-        this.turbo = turbo;
+    public CarView getFrame() {
+        return this.frame;
+    }
+
+    public void setCars(ArrayList<Vehicle> cars, ArrayList<Turbo> turbo, ArrayList<Ramp> ramp) {
+        CarController.cars = cars;
+        CarController.turbo = turbo;
+        CarController.ramp = ramp;
     }
 }

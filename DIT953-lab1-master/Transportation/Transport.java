@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Transport extends Vehicle implements Ramp {
+public class Transport extends Vehicle  {
     private final List<Car> cargo = new ArrayList<>();
     public boolean rampActive = false;
     public double maxCargo;
@@ -33,7 +33,7 @@ public class Transport extends Vehicle implements Ramp {
     /**
      * Activates ramp
      */
-    @Override
+
     public void turnOnRamp() {
         if (getCurrentSpeed() == 0)
             rampActive = true;
@@ -42,7 +42,7 @@ public class Transport extends Vehicle implements Ramp {
     /**
      * Deactivates ramp
      */
-    @Override
+
     public void turnOffRamp() {
         if (getCurrentSpeed() == 0)
             rampActive = false;

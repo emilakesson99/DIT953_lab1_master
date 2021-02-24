@@ -2,8 +2,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public abstract class Vehicle implements Movable {
-    public ArrayList<VehicleObserver> observers;
+public abstract class Vehicle implements Movable, Observers {
+    public ArrayList<VehicleObserver> observers = new ArrayList<>();
     private double x;
     private double y;
     private int nrDoors; // Number of doors on the car
@@ -12,7 +12,6 @@ public abstract class Vehicle implements Movable {
     private Color color; // Color of the car
     private String modelName;
     private Directions currentDir;
-
 
     public enum Directions {
         EAST,
@@ -41,7 +40,7 @@ public abstract class Vehicle implements Movable {
         observers.add(a);
     }
 
-    private void notifyObservers() {
+    public void notifyObservers() {
         for (VehicleObserver o : observers) o.update(this);
     }
 

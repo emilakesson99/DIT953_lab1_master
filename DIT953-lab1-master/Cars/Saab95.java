@@ -45,9 +45,4 @@ public class Saab95 extends Car implements Turbo {
         if (turboOn) turbo = 5;
         return getEnginePower() * 0.01 * turbo;
     }
-
-    @Override
-    public <T> void SendData(T v) {
-
-    }
 }

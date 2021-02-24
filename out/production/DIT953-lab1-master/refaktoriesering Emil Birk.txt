@@ -22,3 +22,14 @@ Den måste integreras med nuvarande paintComponent();
 	- Bygga en CarApp klass där applikationen initieras.
 	- integrera updaterings metoden med CarController så att den kallas kontinuerligt.
 
+DIP: Just nu beror CarC på Scania och saab istället för Abstraktioner. Vi kan Skapa interfaces för både Scania (turbo) och Scania(bed).
+Då slipper vi söka efter den i listan och kan istället bero på interfacet.
+Vi kan också skapa flera listor med fordon där en lista bara har bilar med turbo och en annan har en med bara fordon med flak.
+Modellen ska inte heller vara beronde på vyer men istället vara beronde på Abstraktionen vehicleObserver interface.
+
+OCP: Om vi bygger om koden efter Observer Pattern öppnar det för extenstions för att vi då kan lägga till flera vyer utan att ändra modellen.
+
+ISP : Just nu finns turbo inuti Saab men vi kan skapa ett interface som har turbo i sig.
+Då skulle vi också kunna skapa mer bilar med turbo om det skulle behövas.
+Vi skulle kunna göra samma sak med Scania och bed.
+

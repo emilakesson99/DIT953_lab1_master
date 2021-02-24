@@ -2,7 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-public class Scania extends Vehicle {
+public class Scania extends Vehicle implements Ramp {
 
     private double platformAngle;
     private static final double maxAngle = 70;
