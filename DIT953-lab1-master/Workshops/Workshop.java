@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workshop<R extends Car> {
+public class Workshop<R extends Car> implements Observers {
 
     private static final int maxAmountOfCars = 20;
     private int amountOfCars;
@@ -52,5 +52,14 @@ public class Workshop<R extends Car> {
     }
 
 
+    @Override
+    public void addObserver(GUIObserver v) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+    }
 }
 

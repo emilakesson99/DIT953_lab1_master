@@ -37,6 +37,9 @@ public class CarView extends JFrame {
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
+    JButton addCar = new JButton("add");
+    JButton removeCar = new JButton("remove");
+
     // Constructor
     public CarView(String framename) {
         initComponents(framename);
@@ -79,6 +82,9 @@ public class CarView extends JFrame {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCar, 6);
+        controlPanel.add(removeCar, 7);
+
         controlPanel.setPreferredSize(new Dimension((X / 2) + 4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);

@@ -1,24 +1,14 @@
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public abstract class Vehicle implements Movable, Observers {
-    public ArrayList<VehicleObserver> observers = new ArrayList<>();
-    private double x;
-    private double y;
-    private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
-    private double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private String modelName;
-    private Directions currentDir;
+public abstract class Vehicle implements Observers {
 
-    public enum Directions {
-        EAST,
-        WEST,
-        NORTH,
-        SOUTH
-    }
+    public final ArrayList<GUIObserver> observers = new ArrayList<>();
+    private final int nrDoors; // Number of doors on the car
+    private final double enginePower; // Engine power of the car
+    private final Color color; // Color of the car
+    private final String modelName;
+    public final Movable state;
 
     /**
      * Constructor
@@ -33,46 +23,40 @@ public abstract class Vehicle implements Movable, Observers {
         this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
+        this.state = new MovingState();
 
     }
 
-    public void addObserver(VehicleObserver a) {
+    public void addObserver(GUIObserver a) {
         observers.add(a);
     }
 
     public void notifyObservers() {
-        for (VehicleObserver o : observers) o.update(this);
+        for (GUIObserver o : observers) o.update(this);
     }
 
-    /**
-     * @return nrDoors
-     */
-    public int getNrDoors() {
-        return nrDoors;
+    public Movable.Directions getCurrentDir() {
+        return state.getCurrentDir();
     }
 
-    public Directions getCurrentDir() {
-        return currentDir;
-    }
-
-    public void setCurrentDir(Directions currentDir) {
-        this.currentDir = currentDir;
+    public void setCurrentDir(Movable.Directions currentDir) {
+        state.setCurrentDir(currentDir);
     }
 
     public double getX() {
-        return x;
+        return state.getX();
     }
 
     public double getY() {
-        return y;
+        return state.getY();
     }
 
     public void setX(double x) {
-        this.x = x;
+        state.setX(x);
     }
 
     public void setY(double y) {
-        this.y = y;
+        state.setY(y);
     }
 
     /**
@@ -86,27 +70,11 @@ public abstract class Vehicle implements Movable, Observers {
      * @return currentSpeed
      */
     public double getCurrentSpeed() {
-        return currentSpeed;
+        return state.getCurrentSpeed();
     }
 
     public void setCurrentSpeed(double i) {
-        currentSpeed = i;
-    }
-
-    /**
-     * @return color
-     */
-    public Color getColor() {
-        return color;
-    }
-
-    /**
-     * Package-private Setter
-     *
-     * @param clr
-     */
-    void setColor(Color clr) {
-        color = clr;
+        state.setCurrentSpeed(i);
     }
 
     /**
@@ -126,13 +94,6 @@ public abstract class Vehicle implements Movable, Observers {
     public String getModelName() {
         return modelName;
     }
-
-    /**
-     * set conditions for direction
-     *
-     * @param left, right
-     */
-
 
     /**
      * Abstract class for speedFactor function in sub classes
@@ -183,48 +144,15 @@ public abstract class Vehicle implements Movable, Observers {
                 decrementSpeed(amount);
     }
 
-    /**
-     * Y represents 2D movement on a vertical axis
-     * X represents 2D movement on a horizontal axis
-     */
-    @Override
     public void move() {
-        if (this.currentDir == null) {
-            this.currentDir = Directions.EAST;
-            setX(getX() + getCurrentSpeed());
-        } else if (this.currentDir == Directions.EAST) {
-            setX(getX() + getCurrentSpeed());
-        } else if (this.currentDir == Directions.SOUTH) {
-            setY(getY() - getCurrentSpeed());
-        } else if (this.currentDir == Directions.WEST) {
-            setX(getX() - getCurrentSpeed());
-        }
-
+        state.move();
     }
 
-    @Override
     public void turnLeft() {
-        if (getCurrentDir() == null) {
-            setCurrentDir(Directions.WEST);
-        } else if (getCurrentDir() == Directions.EAST) {
-            setCurrentDir(Directions.NORTH);
-        } else if (getCurrentDir() == Directions.SOUTH) {
-            setCurrentDir(Directions.EAST);
-        } else if (getCurrentDir() == Directions.WEST) {
-            setCurrentDir(Directions.SOUTH);
-        }
+        state.turnLeft();
     }
 
-    @Override
     public void turnRight() {
-        if (getCurrentDir() == null) {
-            setCurrentDir(Directions.EAST);
-        } else if (getCurrentDir() == Directions.EAST) {
-            setCurrentDir(Directions.SOUTH);
-        } else if (getCurrentDir() == Directions.SOUTH) {
-            setCurrentDir(Directions.WEST);
-        } else if (getCurrentDir() == Directions.WEST) {
-            setCurrentDir(Directions.NORTH);
-        }
+        state.turnRight();
     }
 }

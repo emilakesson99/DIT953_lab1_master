@@ -17,7 +17,7 @@ public class Volvo240 extends Car {
     /**
      * This Constructor is used to init a Volvo of model 240
      */
-    public Volvo240() throws IOException {
+    public Volvo240() {
         super(4, 100, Color.black, "Volvo240");
         this.stopEngine();
     }
@@ -29,7 +29,6 @@ public class Volvo240 extends Car {
     public double speedFactor() {
         return getEnginePower() * 0.01 * trimFactor;
     }
-
 
 
 }

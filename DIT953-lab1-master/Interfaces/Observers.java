@@ -4,7 +4,7 @@
 
 public interface Observers {
 
-    void addObserver(VehicleObserver v);
+    void addObserver(GUIObserver v);
 
     void notifyObservers();
 

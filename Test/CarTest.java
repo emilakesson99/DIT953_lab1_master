@@ -20,13 +20,6 @@ class CarTest {
     CarTest() throws IOException {
     }
 
-    @Test
-    void getNrDoors() {
-        assert (saab.getNrDoors() == 2);
-        assert (volvo.getNrDoors() == 4);
-        assert (!(saab.getNrDoors() == 3));
-        assert (!(volvo.getNrDoors() == 3));
-    }
 
     @Test
     void getEnginePower() {
@@ -40,25 +33,7 @@ class CarTest {
         assertTrue(volvo.getCurrentSpeed() >= 0);
     }
 
-    @Test
-    void getColor() {
-        assert (saab.getColor() == Color.red);
-        assert (volvo.getColor() == Color.black);
-        assert (!(saab.getColor() == Color.blue));
-        assert (!(volvo.getColor() == Color.white));
-    }
 
-    @Test
-    void setColor() throws IOException {
-        Saab95 saab1 = new Saab95();
-        Volvo240 volvo1 = new Volvo240();
-        saab1.setColor(Color.white);
-        assert (!(saab1.getColor() == Color.red));
-        assert (saab1.getColor() == Color.white);
-        volvo1.setColor(Color.gray);
-        assert (!(volvo1.getColor() == Color.black));
-        assert (volvo1.getColor() == Color.gray);
-    }
 
     @Test
     void startEngine() {
@@ -132,8 +107,8 @@ class CarTest {
         assertTrue(saab.getY() != 0);
         assertTrue(volvo.getY() != 0);
 
-        saab.setCurrentDir(Car.Directions.EAST);
-        volvo.setCurrentDir(Car.Directions.EAST);
+        saab.setCurrentDir(Movable.Directions.EAST);
+        volvo.setCurrentDir(Movable.Directions.EAST);
         saab.move();
         volvo.move();
         assertTrue(saab.getX() != 0);
@@ -142,27 +117,27 @@ class CarTest {
 
     @Test
     void turnLeft() {
-        saab.setCurrentDir(Car.Directions.EAST);
-        volvo.setCurrentDir(Car.Directions.EAST);
+        saab.setCurrentDir(Movable.Directions.EAST);
+        volvo.setCurrentDir(Movable.Directions.EAST);
         saab.turnLeft();
         volvo.turnLeft();
 
         assertTrue(
-                saab.getCurrentDir() == Car.Directions.NORTH);
+                saab.getCurrentDir() == Movable.Directions.NORTH);
         assertTrue(
-                volvo.getCurrentDir() == Car.Directions.NORTH);
+                volvo.getCurrentDir() == Movable.Directions.NORTH);
     }
 
     @Test
     void turnRight() {
-        saab.setCurrentDir(Car.Directions.EAST);
-        volvo.setCurrentDir(Car.Directions.EAST);
+        saab.setCurrentDir(Movable.Directions.EAST);
+        volvo.setCurrentDir(Movable.Directions.EAST);
         saab.turnRight();
         volvo.turnRight();
 
         assertTrue(
-                saab.getCurrentDir() == Car.Directions.SOUTH);
+                saab.getCurrentDir() == Movable.Directions.SOUTH);
         assertTrue(
-                volvo.getCurrentDir() == Car.Directions.SOUTH);
+                volvo.getCurrentDir() == Movable.Directions.SOUTH);
     }
 }

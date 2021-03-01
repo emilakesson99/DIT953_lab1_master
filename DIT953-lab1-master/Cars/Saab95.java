@@ -18,7 +18,7 @@ public class Saab95 extends Car implements Turbo {
     /**
      * This Constructor is used to init a Saab of model 95
      */
-    public Saab95() throws IOException {
+    public Saab95() {
         super(2, 125, Color.red, "Saab95");
         this.turboOn = false;
         this.stopEngine();

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel implements VehicleObserver {
+public class DrawPanel extends JPanel implements GUIObserver {
 
     BufferedImage img;
     Stack<Observers> stack = new Stack<>();

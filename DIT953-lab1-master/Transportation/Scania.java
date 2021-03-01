@@ -8,7 +8,7 @@ public class Scania extends Vehicle implements Ramp {
     private static final double maxAngle = 70;
     private static final double minAngle = 0;
 
-    public Scania() throws IOException {
+    public Scania() {
         super(2, 540, Color.green, "Scania");
         this.stopEngine();
         changePlatform(0);

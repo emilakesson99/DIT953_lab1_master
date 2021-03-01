@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -21,14 +23,13 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
     // A list of cars, modify if needed
-    static ArrayList<Vehicle> cars;
-    static ArrayList<Turbo> turbo;
-    static ArrayList<Ramp> ramp;
+    static List<Vehicle> cars = new ArrayList<>();
+    static List<Turbo> turbo;
+    static List<Ramp> ramp;
 
-    public CarController(ArrayList<Vehicle> a, ArrayList<Turbo> t, ArrayList<Ramp> r, CarView frame) {
+    public CarController(CarView frame) {
         setFrame(frame);
         initComponents();
-        setCars(a, t, r);
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
@@ -52,9 +53,9 @@ public class CarController {
 
     void checkWindow(Vehicle c) {
         if (c.getX() > 700) {
-            c.setCurrentDir(Vehicle.Directions.WEST);
+            c.state.setCurrentDir(Movable.Directions.WEST);
         } else if (c.getX() < 0) {
-            c.setCurrentDir(Vehicle.Directions.EAST);
+            c.setCurrentDir(Movable.Directions.EAST);
         }
     }
 
@@ -76,8 +77,11 @@ public class CarController {
     void turboOn() {
         for (Turbo car : turbo
         ) {
+            try {
+                car.setTurboOn();
+            } catch (Exception ignored) {
+            }
 
-            car.setTurboOn();
         }
     }
 
@@ -90,14 +94,22 @@ public class CarController {
 
     void turboOff() {
         for (Turbo car : turbo) {
-            car.setTurboOff();
+            try {
+                car.setTurboOff();
+            } catch (Exception ignored) {
+            }
+
+
         }
     }
 
     void liftBed() {
         for (Ramp car : ramp) {
+            try {
+                car.changePlatform(70);
+            } catch (Exception ignored) {
+            }
 
-            car.changePlatform(70);
 
         }
     }
@@ -105,7 +117,11 @@ public class CarController {
     void lowerBed() {
         for (Ramp car : ramp) {
 
-            car.changePlatform(0);
+            try {
+                car.changePlatform(0);
+            } catch (Exception ignored) {
+            }
+
 
         }
     }
@@ -188,6 +204,85 @@ public class CarController {
                                                             brake(frame.gasAmount);
                                                         }
                                                     });
+
+        frame.addCar.addActionListener(new
+
+                                               ActionListener() {
+                                                   @Override
+                                                   public void actionPerformed(ActionEvent e) {
+                                                       addCar();
+                                                   }
+                                               });
+
+        frame.removeCar.addActionListener(new
+
+                                                  ActionListener() {
+                                                      @Override
+                                                      public void actionPerformed(ActionEvent e) {
+                                                          removeCar();
+                                                      }
+                                                  });
+    }
+
+    private void removeCar() {
+        if (cars.size() > 0) {
+            Vehicle v = cars.get(cars.size() - 1);
+            removeFromList(v, cars);
+            removeFromList(v, turbo);
+            removeFromList(v, ramp);
+        }
+    }
+
+    private void addCar() {
+        if (cars.size() < 10) {
+            String[] arr = {"Volvo240", "Saab95", "Scania"};
+            int r = new RandomNumbers(2, 0).Return();
+            Vehicle v;
+            v = (Vehicle) (new Factory()).getObserver(arr[r]);
+            v.addObserver(getFrame().drawPanel);
+            cars.add(v);
+        }
+    }
+
+    private <T> void removeFromList(Observers o, List<T> list) {
+        list.removeIf(object -> object == o);
+    }
+
+    public void addObserver(GUIObserver observer) {
+        loop:
+        for (Vehicle car : cars
+        ) {
+            for (int i = 0; i < car.observers.size(); i++) {
+                if (car.observers.get(i) == observer) {
+                    continue loop;
+                }
+            }
+            car.addObserver(observer);
+        }
+    }
+
+    public static <T extends Turbo> List<T> dupCarListTurbo() {
+        List<T> list = new ArrayList<T>();
+        for (Vehicle car : cars
+        ) {
+            try {
+                list.add((T) car);
+            } catch (Exception ignored) {
+            }
+        }
+        return list;
+    }
+
+    public static <T extends Ramp> List<T> dupCarListRamp() {
+        List<T> list = new ArrayList<T>();
+        for (Vehicle car : cars
+        ) {
+            try {
+                list.add((T) car);
+            } catch (Exception ignored) {
+            }
+        }
+        return list;
     }
 
     public void setFrame(CarView frame) {
@@ -196,11 +291,5 @@ public class CarController {
 
     public CarView getFrame() {
         return this.frame;
-    }
-
-    public void setCars(ArrayList<Vehicle> cars, ArrayList<Turbo> turbo, ArrayList<Ramp> ramp) {
-        CarController.cars = cars;
-        CarController.turbo = turbo;
-        CarController.ramp = ramp;
     }
 }

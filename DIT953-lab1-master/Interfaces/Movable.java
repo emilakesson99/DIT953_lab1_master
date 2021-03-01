@@ -1,17 +1,32 @@
-/**
- * Interface for Car class
- *
- * @author Birk, Emil
- * @version 1.0
- * @since 2021-01-29
- */
+
 public interface Movable {
-    /**
-     * Implemented in Car.java
-     */
+
+    enum Directions {
+        EAST,
+        WEST,
+        NORTH,
+        SOUTH
+    }
+
     void move();
 
     void turnLeft();
 
     void turnRight();
+
+    Directions getCurrentDir();
+
+    void setCurrentDir(Directions currentDir);
+
+    double getX();
+
+    double getY();
+
+    void setX(double x);
+
+    void setY(double y);
+
+    double getCurrentSpeed();
+
+    void setCurrentSpeed(double i);
 }
