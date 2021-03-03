@@ -1,8 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -133,92 +131,17 @@ public class CarController {
     private void initComponents() {
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
-        frame.gasButton.addActionListener(new
+        frame.gasButton.addActionListener(e -> gas(frame.gasAmount));
 
-                                                  ActionListener() {
-                                                      @Override
-                                                      public void actionPerformed(ActionEvent e) {
-                                                          gas(frame.gasAmount);
-                                                      }
-                                                  });
-
-        frame.startButton.addActionListener(new
-
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            startEngine();
-                                                        }
-                                                    });
-        frame.stopButton.addActionListener(new
-
-                                                   ActionListener() {
-                                                       @Override
-                                                       public void actionPerformed(ActionEvent e) {
-                                                           stopEngine();
-                                                       }
-                                                   });
-        frame.turboOnButton.addActionListener(new
-
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              turboOn();
-                                                          }
-                                                      });
-
-        frame.turboOffButton.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               turboOff();
-                                                           }
-                                                       });
-
-        frame.liftBedButton.addActionListener(new
-
-                                                      ActionListener() {
-                                                          @Override
-                                                          public void actionPerformed(ActionEvent e) {
-                                                              liftBed();
-                                                          }
-                                                      });
-        frame.lowerBedButton.addActionListener(new
-
-                                                       ActionListener() {
-                                                           @Override
-                                                           public void actionPerformed(ActionEvent e) {
-                                                               lowerBed();
-                                                           }
-                                                       });
-
-        frame.brakeButton.addActionListener(new
-
-                                                    ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            brake(frame.gasAmount);
-                                                        }
-                                                    });
-
-        frame.addCar.addActionListener(new
-
-                                               ActionListener() {
-                                                   @Override
-                                                   public void actionPerformed(ActionEvent e) {
-                                                       Vehicles.addCar(getFrame().drawPanel);
-                                                   }
-                                               });
-
-        frame.removeCar.addActionListener(new
-
-                                                  ActionListener() {
-                                                      @Override
-                                                      public void actionPerformed(ActionEvent e) {
-                                                          Vehicles.removeCar();
-                                                      }
-                                                  });
+        frame.startButton.addActionListener(e -> startEngine());
+        frame.stopButton.addActionListener(e -> stopEngine());
+        frame.turboOnButton.addActionListener(e -> turboOn());
+        frame.turboOffButton.addActionListener(e -> turboOff());
+        frame.liftBedButton.addActionListener(e -> liftBed());
+        frame.lowerBedButton.addActionListener(e -> lowerBed());
+        frame.brakeButton.addActionListener(e -> brake(frame.gasAmount));
+        frame.addCar.addActionListener(e -> Vehicles.addCar(getFrame().drawPanel));
+        frame.removeCar.addActionListener(e -> Vehicles.removeCar());
     }
 
     public void setVehicles(ListOfVehicles vehicles) {

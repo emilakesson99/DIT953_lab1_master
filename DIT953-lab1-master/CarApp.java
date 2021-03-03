@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class CarApp {
@@ -22,7 +20,7 @@ public class CarApp {
         cc.getVehicles().dupCarListTurbo();
         cc.getVehicles().dupCarListRamp();
 
-        //add event observer to all Vehicles (Possible design flaw)
+        //add event observer to all Vehicles
         cc.getVehicles().addObserver(cc.getFrame().drawPanel);
 
         // Start the timer

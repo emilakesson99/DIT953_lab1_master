@@ -46,7 +46,7 @@ public class ListOfVehicles implements Observers {
     public void notifyObservers() {
         for (Vehicle car : cars
         ) {
-            notifyObservers();
+            car.notifyObservers();
         }
     }
 

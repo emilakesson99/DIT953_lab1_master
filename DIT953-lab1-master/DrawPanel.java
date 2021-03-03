@@ -33,7 +33,7 @@ public class DrawPanel extends JPanel implements GUIObserver {
             }
             g.drawImage(img, (int) ((Vehicle) stack.peek()).getX(), (int) ((Vehicle) stack.peek()).getY() + 100 * i
                     , null);
-            ;// see javadoc for more info on the parameters
+            // see javadoc for more info on the parameters
             stack.pop();
             i++;
         }

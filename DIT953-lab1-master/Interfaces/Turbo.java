@@ -1,9 +1,9 @@
 public interface Turbo {
 
-    public void setTurboOn();
+    void setTurboOn();
 
 
-    public void setTurboOff();
+    void setTurboOff();
 
 
 }

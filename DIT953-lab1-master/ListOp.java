@@ -11,7 +11,4 @@ public class ListOp {
         return list.contains(o);
     }
 
-    static void clearList(List<?> list) {
-        list.clear();
-    }
 }
