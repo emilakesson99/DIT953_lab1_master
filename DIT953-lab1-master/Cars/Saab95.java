@@ -1,6 +1,4 @@
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * Saab95 class

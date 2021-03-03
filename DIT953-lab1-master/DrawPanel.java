@@ -31,12 +31,14 @@ public class DrawPanel extends JPanel implements GUIObserver {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            g.drawImage(img, (int) ((Vehicle) stack.peek()).getX(), (int) ((Vehicle) stack.peek()).getY() + 100 * i, null);
+            g.drawImage(img, (int) ((Vehicle) stack.peek()).getX(), (int) ((Vehicle) stack.peek()).getY() + 100 * i
+                    , null);
             ;// see javadoc for more info on the parameters
             stack.pop();
             i++;
         }
     }
+
 
     //Send Vehicle to stack. Can't change parameters of paintComponent?? (possible design flaw)
     @Override

@@ -3,7 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -23,9 +22,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
     // A list of cars, modify if needed
-    static List<Vehicle> cars = new ArrayList<>();
-    static List<Turbo> turbo;
-    static List<Ramp> ramp;
+    private ListOfVehicles Vehicles;
 
     public CarController(CarView frame) {
         setFrame(frame);
@@ -37,7 +34,7 @@ public class CarController {
      * */
     class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : cars) {
+            for (Vehicle car : Vehicles.getCars()) {
                 car.move();
                 checkWindow(car);
                 car.notifyObservers();
@@ -61,21 +58,21 @@ public class CarController {
 
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle car : cars
+        for (Vehicle car : Vehicles.getCars()
         ) {
             car.gas(gas);
         }
     }
 
     void startEngine() {
-        for (Vehicle car : cars
+        for (Vehicle car : Vehicles.getCars()
         ) {
             car.startEngine();
         }
     }
 
     void turboOn() {
-        for (Turbo car : turbo
+        for (Turbo car : Vehicles.getTurbo()
         ) {
             try {
                 car.setTurboOn();
@@ -86,14 +83,14 @@ public class CarController {
     }
 
     void stopEngine() {
-        for (Vehicle car : cars
+        for (Vehicle car : Vehicles.getCars()
         ) {
             car.stopEngine();
         }
     }
 
     void turboOff() {
-        for (Turbo car : turbo) {
+        for (Turbo car : Vehicles.getTurbo()) {
             try {
                 car.setTurboOff();
             } catch (Exception ignored) {
@@ -104,7 +101,7 @@ public class CarController {
     }
 
     void liftBed() {
-        for (Ramp car : ramp) {
+        for (Ramp car : Vehicles.getRamp()) {
             try {
                 car.changePlatform(70);
             } catch (Exception ignored) {
@@ -115,7 +112,7 @@ public class CarController {
     }
 
     void lowerBed() {
-        for (Ramp car : ramp) {
+        for (Ramp car : Vehicles.getRamp()) {
 
             try {
                 car.changePlatform(0);
@@ -128,7 +125,7 @@ public class CarController {
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Vehicle car : cars) {
+        for (Vehicle car : Vehicles.getCars()) {
             car.brake(brake);
         }
     }
@@ -210,7 +207,7 @@ public class CarController {
                                                ActionListener() {
                                                    @Override
                                                    public void actionPerformed(ActionEvent e) {
-                                                       addCar();
+                                                       Vehicles.addCar(getFrame().drawPanel);
                                                    }
                                                });
 
@@ -219,70 +216,17 @@ public class CarController {
                                                   ActionListener() {
                                                       @Override
                                                       public void actionPerformed(ActionEvent e) {
-                                                          removeCar();
+                                                          Vehicles.removeCar();
                                                       }
                                                   });
     }
 
-    private void removeCar() {
-        if (cars.size() > 0) {
-            Vehicle v = cars.get(cars.size() - 1);
-            removeFromList(v, cars);
-            removeFromList(v, turbo);
-            removeFromList(v, ramp);
-        }
+    public void setVehicles(ListOfVehicles vehicles) {
+        Vehicles = vehicles;
     }
 
-    private void addCar() {
-        if (cars.size() < 10) {
-            String[] arr = {"Volvo240", "Saab95", "Scania"};
-            int r = new RandomNumbers(2, 0).Return();
-            Vehicle v;
-            v = (Vehicle) (new Factory()).getObserver(arr[r]);
-            v.addObserver(getFrame().drawPanel);
-            cars.add(v);
-        }
-    }
-
-    private <T> void removeFromList(Observers o, List<T> list) {
-        list.removeIf(object -> object == o);
-    }
-
-    public void addObserver(GUIObserver observer) {
-        loop:
-        for (Vehicle car : cars
-        ) {
-            for (int i = 0; i < car.observers.size(); i++) {
-                if (car.observers.get(i) == observer) {
-                    continue loop;
-                }
-            }
-            car.addObserver(observer);
-        }
-    }
-
-    public static <T extends Turbo> List<T> dupCarListTurbo() {
-        List<T> list = new ArrayList<T>();
-        for (Vehicle car : cars
-        ) {
-            try {
-                list.add((T) car);
-            } catch (Exception ignored) {
-            }
-        }
-        return list;
-    }
-
-    public static <T extends Ramp> List<T> dupCarListRamp() {
-        List<T> list = new ArrayList<T>();
-        for (Vehicle car : cars
-        ) {
-            try {
-                list.add((T) car);
-            } catch (Exception ignored) {
-            }
-        }
-        return list;
+    public ListOfVehicles getVehicles() {
+        return Vehicles;
     }
 
     public void setFrame(CarView frame) {

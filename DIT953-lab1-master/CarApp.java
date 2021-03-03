@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class CarApp {
@@ -12,15 +14,16 @@ public class CarApp {
 
         CarController cc = new CarController(new CarView("CarSim 1.0"));
 
-        CarController.cars.add(sc);
-        CarController.cars.add(s);
-        CarController.cars.add(v);
+        cc.setVehicles(new ListOfVehicles());
+        cc.getVehicles().getCars().add(sc);
+        cc.getVehicles().getCars().add(v);
+        cc.getVehicles().getCars().add(s);
 
-        CarController.turbo = CarController.dupCarListTurbo();
-        CarController.ramp = CarController.dupCarListRamp();
+        cc.getVehicles().dupCarListTurbo();
+        cc.getVehicles().dupCarListRamp();
 
         //add event observer to all Vehicles (Possible design flaw)
-        cc.addObserver(cc.getFrame().drawPanel);
+        cc.getVehicles().addObserver(cc.getFrame().drawPanel);
 
         // Start the timer
         cc.startTimer(cc);
