@@ -1,5 +1,5 @@
 
 
-public interface Ramp extends GeneralInterface {
+public interface Ramp {
     void changePlatform(int a);
 }

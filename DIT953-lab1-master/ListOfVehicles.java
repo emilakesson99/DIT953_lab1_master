@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOfVehicles {
+public class ListOfVehicles implements Observers {
 
     private final List<Vehicle> cars = new ArrayList<>();
     private final List<Turbo> turbo = new ArrayList<>();
@@ -28,7 +28,7 @@ public class ListOfVehicles {
         }
     }
 
-
+    @Override
     public void addObserver(GUIObserver observer) {
         loop:
         for (Vehicle car : cars
@@ -39,6 +39,14 @@ public class ListOfVehicles {
                 }
             }
             car.addObserver(observer);
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Vehicle car : cars
+        ) {
+            notifyObservers();
         }
     }
 

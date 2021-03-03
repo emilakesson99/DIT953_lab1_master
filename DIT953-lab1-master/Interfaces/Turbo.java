@@ -1,4 +1,4 @@
-public interface Turbo extends GeneralInterface {
+public interface Turbo {
 
     public void setTurboOn();
 
