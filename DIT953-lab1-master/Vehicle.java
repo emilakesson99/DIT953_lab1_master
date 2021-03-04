@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 public abstract class Vehicle implements Observers {
 
-    public final ArrayList<GUIObserver> observers = new ArrayList<>();
+    private final ArrayList<GUIObserver> observers = new ArrayList<>();
     private final int nrDoors; // Number of doors on the car
     private final double enginePower; // Engine power of the car
     private final Color color; // Color of the car
     private final String modelName;
-    public final Movable state;
+    private final Movable state;
 
     /**
      * Constructor
@@ -57,6 +57,14 @@ public abstract class Vehicle implements Observers {
 
     public void setY(double y) {
         state.setY(y);
+    }
+
+    public ArrayList<GUIObserver> getObservers() {
+        return observers;
+    }
+
+    public Movable getState() {
+        return state;
     }
 
     /**

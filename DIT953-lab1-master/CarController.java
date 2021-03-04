@@ -48,7 +48,7 @@ public class CarController {
 
     void checkWindow(Vehicle c) {
         if (c.getX() > 700) {
-            c.state.setCurrentDir(Movable.Directions.WEST);
+            c.getState().setCurrentDir(Movable.Directions.WEST);
         } else if (c.getX() < 0) {
             c.setCurrentDir(Movable.Directions.EAST);
         }
@@ -140,7 +140,7 @@ public class CarController {
         frame.liftBedButton.addActionListener(e -> liftBed());
         frame.lowerBedButton.addActionListener(e -> lowerBed());
         frame.brakeButton.addActionListener(e -> brake(frame.gasAmount));
-        frame.addCar.addActionListener(e -> Vehicles.addCar(getFrame().drawPanel));
+        frame.addCar.addActionListener(e -> Vehicles.addCar());
         frame.removeCar.addActionListener(e -> Vehicles.removeCar());
     }
 

@@ -13,10 +13,12 @@ public class CarView extends JFrame {
     private static final int X = 800;
     private static final int Y = 600;
 
-    // The controller member
+// The controller member
     // CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y - 240);
+    static DrawPanel drawPanel = new DrawPanel(X, Y - 240);
+    static SpeedPanel speedPanel = new SpeedPanel(X, 80);
+
 
     JPanel controlPanel = new JPanel();
 
@@ -50,7 +52,7 @@ public class CarView extends JFrame {
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X, Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
+        this.add(speedPanel);
         this.add(drawPanel);
 
 

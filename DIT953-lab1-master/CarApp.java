@@ -21,7 +21,8 @@ public class CarApp {
         cc.getVehicles().dupCarListRamp();
 
         //add event observer to all Vehicles
-        cc.getVehicles().addObserver(cc.getFrame().drawPanel);
+        cc.getVehicles().addObserver(CarView.drawPanel);
+        cc.getVehicles().addObserver(CarView.speedPanel);
 
         // Start the timer
         cc.startTimer(cc);

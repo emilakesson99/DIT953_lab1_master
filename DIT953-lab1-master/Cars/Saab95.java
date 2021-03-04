@@ -11,7 +11,7 @@ public class Saab95 extends Car implements Turbo {
     /**
      * if turbo is on it's set to true
      */
-    public boolean turboOn;
+    private boolean turboOn;
 
     /**
      * This Constructor is used to init a Saab of model 95
@@ -33,6 +33,10 @@ public class Saab95 extends Car implements Turbo {
     @Override
     public void setTurboOff() {
         turboOn = false;
+    }
+
+    public boolean isTurboOn() {
+        return turboOn;
     }
 
     /**

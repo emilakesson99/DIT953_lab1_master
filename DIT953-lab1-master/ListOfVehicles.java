@@ -17,11 +17,12 @@ public class ListOfVehicles implements Observers {
         }
     }
 
-    public void addCar(GUIObserver gui) {
+    public void addCar() {
         if (cars.size() < 10) {
             int r = new RandomNumbers(2, 0).Return();
             Vehicle v = (Vehicle) (new Factory()).getObserver(randomValues[r]);
-            v.addObserver(gui);
+            v.addObserver(CarView.drawPanel);
+            v.addObserver(CarView.speedPanel);
             cars.add(v);
             dupCarListTurbo();
             dupCarListRamp();
@@ -33,8 +34,8 @@ public class ListOfVehicles implements Observers {
         loop:
         for (Vehicle car : cars
         ) {
-            for (int i = 0; i < car.observers.size(); i++) {
-                if (car.observers.get(i) == observer) {
+            for (int i = 0; i < car.getObservers().size(); i++) {
+                if (car.getObservers().get(i) == observer) {
                     continue loop;
                 }
             }
