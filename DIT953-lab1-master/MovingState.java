@@ -85,4 +85,5 @@ public class MovingState implements Movable {
     public void setCurrentSpeed(double currentSpeed) {
         this.currentSpeed = currentSpeed;
     }
+
 }

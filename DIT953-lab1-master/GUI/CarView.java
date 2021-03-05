@@ -17,7 +17,7 @@ public class CarView extends JFrame {
     // CarController carC;
 
     static DrawPanel drawPanel = new DrawPanel(X, Y - 240);
-    static SpeedPanel speedPanel = new SpeedPanel(X, 80);
+    static SpeedPanel speedPanel = new SpeedPanel(X, 30);
 
 
     JPanel controlPanel = new JPanel();

@@ -19,6 +19,7 @@ public abstract class Vehicle implements Observers {
      * @param modelName   This is car model name
      */
     public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
+
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.color = color;
@@ -36,27 +37,27 @@ public abstract class Vehicle implements Observers {
     }
 
     public Movable.Directions getCurrentDir() {
-        return state.getCurrentDir();
+        return getState().getCurrentDir();
     }
 
     public void setCurrentDir(Movable.Directions currentDir) {
-        state.setCurrentDir(currentDir);
+        getState().setCurrentDir(currentDir);
     }
 
     public double getX() {
-        return state.getX();
+        return getState().getX();
     }
 
     public double getY() {
-        return state.getY();
+        return getState().getY();
     }
 
     public void setX(double x) {
-        state.setX(x);
+        getState().setX(x);
     }
 
     public void setY(double y) {
-        state.setY(y);
+        getState().setY(y);
     }
 
     public ArrayList<GUIObserver> getObservers() {
@@ -78,11 +79,11 @@ public abstract class Vehicle implements Observers {
      * @return currentSpeed
      */
     public double getCurrentSpeed() {
-        return state.getCurrentSpeed();
+        return getState().getCurrentSpeed();
     }
 
     public void setCurrentSpeed(double i) {
-        state.setCurrentSpeed(i);
+        getState().setCurrentSpeed(i);
     }
 
     /**
@@ -153,14 +154,14 @@ public abstract class Vehicle implements Observers {
     }
 
     public void move() {
-        state.move();
+        getState().move();
     }
 
     public void turnLeft() {
-        state.turnLeft();
+        getState().turnLeft();
     }
 
     public void turnRight() {
-        state.turnRight();
+        getState().turnRight();
     }
 }

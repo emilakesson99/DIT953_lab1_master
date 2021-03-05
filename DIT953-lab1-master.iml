@@ -11,6 +11,8 @@
       <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Interfaces" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Transportation" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Workshops" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/Controllers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DIT953-lab1-master/GUI" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

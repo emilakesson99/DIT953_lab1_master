@@ -26,8 +26,10 @@ public class SpeedPanel extends JPanel implements GUIObserver {
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
 
+            Vehicle v = (Vehicle) getStack().peek();
+            double roundOff = Math.round(v.getCurrentSpeed() * 100.0) / 100.0;
             g2.setFont(new Font("TimesRoman", Font.PLAIN, 6));
-            g2.drawString(((Vehicle) getStack().peek()).getModelName() + " " + "Velocity:" + " " + ((Vehicle) getStack().peek()).getCurrentSpeed(), 70 * i, 10);
+            g2.drawString((v.getModelName() + " " + "Velocity:" + " " + roundOff), 70 * i, 10);
 
             stack.pop();
             i++;
