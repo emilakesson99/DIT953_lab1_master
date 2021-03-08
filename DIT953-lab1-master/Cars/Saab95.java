@@ -8,6 +8,7 @@ import java.awt.*;
  * @since 2021-01-29
  */
 public class Saab95 extends Car implements Turbo {
+    
     /**
      * if turbo is on it's set to true
      */

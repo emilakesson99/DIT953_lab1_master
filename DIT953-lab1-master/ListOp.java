@@ -3,7 +3,7 @@ import java.util.List;
 
 public class ListOp {
 
-    static void removeFromList(Observers o, List<?> list) {
+    static void removeFromList(Object o, List<?> list) {
         list.removeIf(object -> object == o);
     }
 

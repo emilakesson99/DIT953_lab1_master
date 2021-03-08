@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-public abstract class Vehicle implements Observers {
+public abstract class Vehicle {
 
     private final ArrayList<GUIObserver> observers = new ArrayList<>();
     private final int nrDoors; // Number of doors on the car

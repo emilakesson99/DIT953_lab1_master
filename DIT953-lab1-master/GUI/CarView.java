@@ -13,12 +13,8 @@ public class CarView extends JFrame {
     private static final int X = 800;
     private static final int Y = 600;
 
-// The controller member
-    // CarController carC;
-
-    static DrawPanel drawPanel = new DrawPanel(X, Y - 240);
-    static SpeedPanel speedPanel = new SpeedPanel(X, 30);
-
+    static DrawPanel drawPanel; // = new DrawPanel(X, Y - 240);
+    static SpeedPanel speedPanel;// = new SpeedPanel(X, 30);
 
     JPanel controlPanel = new JPanel();
 
@@ -41,7 +37,9 @@ public class CarView extends JFrame {
     JButton removeCar = new JButton("remove");
 
     // Constructor
-    public CarView(String framename) {
+    public CarView(String framename, ListOfVehicles v) {
+        drawPanel = new DrawPanel(X, Y - 240, v);
+        speedPanel = new SpeedPanel(X, 30, v);
         initComponents(framename);
     }
 

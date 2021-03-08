@@ -9,13 +9,22 @@ import java.awt.event.ActionListener;
  */
 
 public class CarController {
-    // member fields:
-
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
     // each step between delays.
     public final Timer timer = new Timer(delay, new TimerListener());
+
+    class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Vehicles.notifyObservers();
+            for (Vehicle car : Vehicles.getCars()) {
+                car.move();
+                Vehicles.checkWindow(car);
+            }
+
+        }
+    }
 
     // The frame that represents this instance View of the MVC pattern
     private CarView frame;
@@ -27,32 +36,6 @@ public class CarController {
         initComponents();
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-     * view to update its images. Change this method to your needs.
-     * */
-    class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Vehicle car : Vehicles.getCars()) {
-                car.move();
-                checkWindow(car);
-                car.notifyObservers();
-            }
-
-        }
-    }
-
-    //methods:
-    public void startTimer(CarController cc) {
-        cc.timer.start();
-    }
-
-    void checkWindow(Vehicle c) {
-        if (c.getX() > 700) {
-            c.getState().setCurrentDir(Movable.Directions.WEST);
-        } else if (c.getX() < 0) {
-            c.setCurrentDir(Movable.Directions.EAST);
-        }
-    }
 
     void gas(int amount) {
         double gas = ((double) amount) / 100;

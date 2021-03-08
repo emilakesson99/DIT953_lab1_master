@@ -1,12 +1,28 @@
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOfVehicles implements Observers {
+public class ListOfVehicles implements Observable {
 
-    private final List<Vehicle> cars = new ArrayList<>();
-    private final List<Turbo> turbo = new ArrayList<>();
-    private final List<Ramp> ramp = new ArrayList<>();
-    private final String[] randomValues = {"Volvo240", "Saab95", "Scania"};
+    private static final List<Observer> observers = new ArrayList<>();
+    private static final List<Vehicle> cars = new ArrayList<>();
+    private static final List<Turbo> turbo = new ArrayList<>();
+    private static final List<Ramp> ramp = new ArrayList<>();
+    private static final String[] randomValues = {"Volvo240", "Saab95", "Scania"};
+
+    public static void startTimer(CarController cc) {
+        cc.timer.start();
+    }
+
+    void checkWindow(Vehicle c) {
+        if (c.getX() > 700) {
+            c.getState().setCurrentDir(Movable.Directions.WEST);
+        } else if (c.getX() < 0) {
+            c.setCurrentDir(Movable.Directions.EAST);
+        }
+    }
 
     public void removeCar() {
         if (cars.size() > 0) {
@@ -21,8 +37,7 @@ public class ListOfVehicles implements Observers {
         if (cars.size() < 10) {
             int r = new RandomNumbers(2, 0).Return();
             Vehicle v = (Vehicle) (new Factory()).getObserver(randomValues[r]);
-            v.addObserver(CarView.drawPanel);
-            v.addObserver(CarView.speedPanel);
+
             cars.add(v);
             dupCarListTurbo();
             dupCarListRamp();
@@ -30,24 +45,18 @@ public class ListOfVehicles implements Observers {
     }
 
     @Override
-    public void addObserver(GUIObserver observer) {
-        loop:
-        for (Vehicle car : cars
-        ) {
-            for (int i = 0; i < car.getObservers().size(); i++) {
-                if (car.getObservers().get(i) == observer) {
-                    continue loop;
-                }
-            }
-            car.addObserver(observer);
+    public void addObserver(Observer observer) {
+        if (!observers.contains(observer)) {
+            observers.add(observer);
         }
+
     }
 
     @Override
     public void notifyObservers() {
-        for (Vehicle car : cars
+        for (Observer o : observers
         ) {
-            car.notifyObservers();
+            o.update();
         }
     }
 
@@ -90,5 +99,9 @@ public class ListOfVehicles implements Observers {
 
     public List<Ramp> getRamp() {
         return ramp;
+    }
+
+    public ListOfVehicles() {
+
     }
 }

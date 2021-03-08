@@ -1,16 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Stack;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SpeedPanel extends JPanel implements GUIObserver {
+public class SpeedPanel extends JPanel implements Observer {
 
-    private final Stack<Observers> stack = new Stack<>();
+    ListOfVehicles vehicles;
 
-    public Stack<Observers> getStack() {
-        return stack;
-    }
-
-    public SpeedPanel(int x, int y) {
+    public SpeedPanel(int x, int y, ListOfVehicles v) {
+        this.vehicles = v;
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.GRAY);
@@ -21,25 +20,22 @@ public class SpeedPanel extends JPanel implements GUIObserver {
         int i = 1;
 
         super.paintComponent(g);
-        while (!stack.isEmpty()) {
+
+        for (Vehicle v : vehicles.getCars()) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
 
-            Vehicle v = (Vehicle) getStack().peek();
             double roundOff = Math.round(v.getCurrentSpeed() * 100.0) / 100.0;
             g2.setFont(new Font("TimesRoman", Font.PLAIN, 6));
             g2.drawString((v.getModelName() + " " + "Velocity:" + " " + roundOff), 70 * i, 10);
-
-            stack.pop();
             i++;
         }
+
     }
 
     @Override
-    public <T> void update(T v) {
-        stack.add((Observers) v);
+    public void update() {
         repaint();
-
     }
 }
